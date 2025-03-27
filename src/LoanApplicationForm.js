@@ -1,9 +1,42 @@
-// LoanApplicationForm.js
-import Form from "@rjsf/core"; // Default import instead of named export
+import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import { useMemo } from "react";
 import loanSchema from './LoanSchema.json';
 
+//array field template for add/remove buttons
+const CustomArrayFieldTemplate = (props) => {
+  return (
+    <div className="array-field mb-4">
+      <div className="array-items">
+        {props.items.map((element, index) => (
+          <div key={element.key} className="array-item card mb-3 p-3">
+            <div className="array-item-content">
+              {element.children}
+              {element.hasRemove && (
+                <button
+                  type="button"
+                  className="btn btn-danger btn-sm mt-2"
+                  onClick={element.onDropIndexClick(element.index)}
+                >
+                  {props.uiSchema["ui:options"]?.removeButtonText || "Remove"}
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      {props.canAdd && (
+        <button
+          type="button"
+          className="btn btn-primary mt-2"
+          onClick={props.onAddClick}
+        >
+          {props.uiSchema["ui:options"]?.addButtonText || "Add Item"}
+        </button>
+      )}
+    </div>
+  );
+};
 
 const LoanApplicationForm = () => {
   const customValidator = useMemo(() => {
@@ -21,7 +54,9 @@ const LoanApplicationForm = () => {
         "ui:options": {
           addable: true,
           removable: true,
-          orderable: false
+          orderable: false,
+          addButtonText: "Add Director",
+          removeButtonText: "Remove Director"
         },
         items: {
           tags: {
@@ -54,7 +89,9 @@ const LoanApplicationForm = () => {
         "ui:options": {
           addable: true,
           removable: true,
-          orderable: false
+          orderable: false,
+          addButtonText: "Add Guarantor",
+          removeButtonText: "Remove Guarantor"
         },
         items: {
           "ui:order": ["name", "panNumber", "relationship", "relationOther"],
@@ -76,8 +113,8 @@ const LoanApplicationForm = () => {
   };
 
   const handleSubmit = ({ formData }) => {
+    alert("From Submitted");
     console.log("Form submitted:", formData);
-    // Add your submission logic here
   };
 
   return (
@@ -89,11 +126,20 @@ const LoanApplicationForm = () => {
         validator={customValidator}
         onSubmit={handleSubmit}
         templates={{
+          ArrayFieldTemplate: CustomArrayFieldTemplate,
           FieldTemplate: (props) => (
             <div className="form-group mb-3">
-              <label className="form-label">{props.schema.title}</label>
+              <label className="form-label fw-bold">
+                {props.schema.title}
+                {props.required && <span className="text-danger"> *</span>}
+              </label>
               {props.children}
               {props.errors}
+              {props.schema.description && (
+                <small className="form-text text-muted">
+                  {props.schema.description}
+                </small>
+              )}
             </div>
           )
         }}

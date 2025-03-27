@@ -15,7 +15,8 @@
           "gstin": {
             "type": "string",
             "title": "GSTIN",
-            "pattern": "^\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z0-9]{1}Z[\\dA-Z]{1}$"
+            "pattern": "^\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z0-9]{1}Z[\\dA-Z]{1}$",
+            "description": "Enter your GSTIN (Format: XXAAAAA000A1Z5)"
           },
           "directors": {
             "type": "array",
@@ -31,7 +32,8 @@
                 "panNumber": {
                   "type": "string",
                   "title": "PAN Number",
-                  "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+                  "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+                  "description": "Enter the PAN Number of the director (Format: ABCDE1234F)"
                 },
                 "tags": {
                   "type": "array",
@@ -80,7 +82,8 @@
                 "panNumber": {
                   "type": "string",
                   "title": "PAN Number",
-                  "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+                  "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+                  "description": "Enter the PAN Number of the director (Format: ABCDE1234F)"
                 },
                 "relationship": {
                   "type": "string",
