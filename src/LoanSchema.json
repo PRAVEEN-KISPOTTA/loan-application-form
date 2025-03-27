@@ -60,13 +60,15 @@
             "type": "number",
             "title": "Credit Score",
             "minimum": 300,
-            "maximum": 850
+            "maximum": 850,
+            "description": "Enter your credit score (0 - 850)"
           },
           "loanAmount": {
             "type": "number",
             "title": "Required Loan Amount",
             "minimum": 50000,
-            "maximum": 500000
+            "maximum": 500000,
+            "description": "Select the loan amount you wish to apply for"
           },
           "guarantors": {
             "type": "array",
@@ -88,11 +90,13 @@
                 "relationship": {
                   "type": "string",
                   "title": "Relationship",
-                  "enum": ["Father", "Mother", "Brother", "Sister", "Spouse", "Other"]
+                  "enum": ["Father", "Mother", "Brother", "Sister", "Spouse", "Other"],
+                  "description": "Select the relationship with the applicant"
                 },
                 "relationOther": {
                   "type": "string",
-                  "title": "Specify Relationship"
+                  "title": "Specify Relationship",
+                  "description": "Please specify if 'Other' is selected for relationship"
                 }
               },
               "required": ["name", "panNumber", "relationship"],
@@ -121,9 +125,11 @@
             "title": "Bank Statements",
             "items": {
               "type": "string",
-              "format": "data-url"
+              "format": "data-url",
+              "description": "Upload your bank statements as files (multiple files allowed)"
             },
-            "minItems": 1
+            "minItems": 1,
+            "description": "Upload your bank statements (required if Credit Score < 700)"
           }
         },
         "required": ["creditScore", "loanAmount"],
