@@ -143,4 +143,3 @@
     },
     "required": ["businessDetails", "loanDetails"]
   }
-  
